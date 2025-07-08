@@ -13,6 +13,9 @@ namespace TaskProjectManagement.Domain.Entities
         public string MissionDescription { get; set; }
         public int TeamId { get; set; }
         public Team Team { get; set; }
+        public int MissionStatusId { get; set; }
+        public MissionStatus MissionStatus { get; set; }
+        
         
     }
 }

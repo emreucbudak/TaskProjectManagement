@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace TaskProjectManagement.Domain.Entities
 {
-    internal class MissionStatus
+    public class MissionStatus
     {
+        public int MissionStatusId { get; set; }
+        public string TaskStatus {  get; set; }
+        public ICollection<Mission> Missions { get; set; }
     }
 }

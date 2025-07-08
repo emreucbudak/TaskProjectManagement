@@ -16,7 +16,6 @@ namespace TaskProjectManagement.Domain.Entities
         public string Password { get; set; }
         public int AuthorizationId { get; set; }
         public Authorization Authorization { get; set; }
-        public ICollection<Notifications> Notifications { get; set; }
         public Team CreatedTeam { get; set; }
         public ICollection<Demand> Demands { get; set; }
         public int? CreatedById { get; set; }
@@ -24,6 +23,8 @@ namespace TaskProjectManagement.Domain.Entities
         public ICollection<User> CreatedUsers { get; set; }
         public int TeamId   { get; set; }
         public Team Team { get; set; }
+
+        public ICollection<UserNotification> UserNotifications { get; set; }
 
     }
 }

@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace TaskProjectManagement.Domain.Entities
 {
-    public class Notifications
+    public class UserNotification
     {
-        public int NotificationId { get; set; }
-        public string NotificationTitle { get; set; }
-        public string NotificationText { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
 
-        public ICollection<UserNotification> UserNotifications { get; set; }
+        public int NotificationId { get; set; }
+        public Notification Notification { get; set; }
+
+        public bool IsRead { get; set; } = false;
     }
 }
