@@ -22,6 +22,8 @@ namespace TaskProjectManagement.Domain.Entities
         public int? CreatedById { get; set; }
         public User CreatedBy { get; set; }
         public ICollection<User> CreatedUsers { get; set; }
+        public int TeamId   { get; set; }
+        public Team Team { get; set; }
 
     }
 }
