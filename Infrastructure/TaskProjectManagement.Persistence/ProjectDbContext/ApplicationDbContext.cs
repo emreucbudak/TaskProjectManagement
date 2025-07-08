@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TaskProjectManagement.Domain.Entities;
 
-namespace TaskProjectManagement.Persistence.ApplicationDbContext
+namespace TaskProjectManagement.Persistence.ProjectDbContext
 {
     public class ApplicationDbContext : DbContext
     {

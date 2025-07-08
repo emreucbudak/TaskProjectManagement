@@ -1,37 +1,53 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using TaskProjectManagement.Application.Interfaces.Repositories;
+using TaskProjectManagement.Persistence.ProjectDbContext;
+
 
 namespace TaskProjectManagement.Persistence.Repositories
 {
     public class RepositoryBase<T> : IRepositoryBase<T> where T : class, new()
     {
-        public Task Add(T entity)
+        private readonly ApplicationDbContext _db;
+
+        public RepositoryBase(ApplicationDbContext db)
         {
-            throw new NotImplementedException();
+            _db = db;
         }
 
-        public Task Delete(T entity)
+        public async Task AddObj(T entity)
         {
-            throw new NotImplementedException();
+            await _db.AddAsync(entity);
+            await _db.SaveChangesAsync();
+
         }
 
-        public Task<IEnumerable<T>> GetAll()
+        public async Task DeleteObj(T entity)
         {
-            throw new NotImplementedException();
+             _db.Remove(entity);
+            await _db.SaveChangesAsync();
         }
 
-        public Task<T> GetById(int id)
+        public async Task<IEnumerable<T>> GetAllObj(bool v)
         {
-            throw new NotImplementedException();
+            return v ?  await _db.Set<T>().AsNoTracking().ToListAsync() : await  _db.Set<T>().ToListAsync();
+            
         }
 
-        public Task Update(T entity)
+        public async Task<T> GetByIdObj(Expression<Func<T, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return await _db.Set<T>().Where(predicate).SingleOrDefaultAsync();
+        }
+
+        public async Task UpdateObj(T entity)
+        {
+             _db.Update(entity);
+            await _db.SaveChangesAsync();
         }
     }
 }
