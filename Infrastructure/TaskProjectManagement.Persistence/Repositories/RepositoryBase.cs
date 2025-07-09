@@ -38,6 +38,10 @@ namespace TaskProjectManagement.Persistence.Repositories
             return v ?  await _db.Set<T>().AsNoTracking().ToListAsync() : await  _db.Set<T>().ToListAsync();
             
         }
+        public IQueryable<T> GetObjSps(bool v)
+        {
+            return v ? _db.Set<T>().AsNoTracking() : _db.Set<T>();
+        }
 
         public async Task<T> GetByIdObj(Expression<Func<T, bool>> predicate)
         {

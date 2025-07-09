@@ -40,10 +40,7 @@ namespace TaskProjectManagement.Persistence.Repositories
  
         }
 
-        public Task<UserNotification> GetUserNotification(int UserId, int NotificationsId)
-        {
-            throw new NotImplementedException();
-        }
+
         private async Task<IEnumerable<UserNotification>> GetAllNotificationsByUserId (int id )
         {
             var x = await GetAllObj(false);

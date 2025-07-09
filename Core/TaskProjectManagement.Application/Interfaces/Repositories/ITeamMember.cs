@@ -11,7 +11,7 @@ namespace TaskProjectManagement.Application.Interfaces.Repositories
     {
         Task AddMember(int teamID, int userID);
         Task DeleteMember(int teamID, int userID);
-        Task<TeamMember> GetMember(int teamID, int userID);
+        Task<TeamMember> GetMember(int userID);
         Task<IEnumerable<TeamMember>> GetAllMembers(int teamID);
 
     }
