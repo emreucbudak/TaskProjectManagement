@@ -13,6 +13,6 @@ namespace TaskProjectManagement.Application.Interfaces.Repositories
         Task DeleteDemand(Demand demand);
         Task UpdateDemand(Demand demand);
         Task<Demand> GetDemandById (int id);
-        Task<ICollection<Demand>> GetAllDemands();
+        Task<IEnumerable<Demand>> GetAllDemands();
     }
 }
