@@ -19,12 +19,12 @@ namespace TaskProjectManagement.Domain.Entities
         public Team CreatedTeam { get; set; }
         public ICollection<Demand> Demands { get; set; }
         public int? CreatedById { get; set; }
-        public User CreatedBy { get; set; }
-        public ICollection<User> CreatedUsers { get; set; }
+        public User? CreatedBy { get; set; }
+        public ICollection<User>? CreatedUsers { get; set; }
         public int TeamId   { get; set; }
         public Team Team { get; set; }
 
-        public ICollection<UserNotification> UserNotifications { get; set; }
+        public ICollection<UserNotification>? UserNotifications { get; set; }
 
     }
 }
