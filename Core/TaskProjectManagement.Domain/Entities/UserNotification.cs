@@ -14,6 +14,6 @@ namespace TaskProjectManagement.Domain.Entities
         public int NotificationId { get; set; }
         public Notifications Notification { get; set; }
 
-        public bool IsRead { get; set; } = false;
+       
     }
 }
