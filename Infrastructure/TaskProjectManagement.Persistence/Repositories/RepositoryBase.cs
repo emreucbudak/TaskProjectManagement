@@ -41,7 +41,7 @@ namespace TaskProjectManagement.Persistence.Repositories
 
         public async Task<T> GetByIdObj(Expression<Func<T, bool>> predicate)
         {
-            return await _db.Set<T>().Where(predicate).SingleOrDefaultAsync();
+            return await _db.Set<T>().Where(predicate).FirstOrDefaultAsync();
         }
 
         public async Task UpdateObj(T entity)

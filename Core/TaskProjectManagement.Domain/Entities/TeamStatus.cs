@@ -12,5 +12,9 @@ namespace TaskProjectManagement.Domain.Entities
         public string Status{ get; set; }
         public int TeamId { get; set; }
         public Team Team { get; set; }
+
+
+
+
     }
 }

@@ -14,6 +14,8 @@ namespace TaskProjectManagement.Domain.Entities
         public User Creator { get; set; }
         public ICollection<TeamMember> Member { get; set; }
         public ICollection<Demand> Demands { get; set; }
+        public int MissionId { get; set; }
+        public Mission Mission { get; set; }
 
 
 

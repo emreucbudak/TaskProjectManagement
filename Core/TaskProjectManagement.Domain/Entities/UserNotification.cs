@@ -12,7 +12,7 @@ namespace TaskProjectManagement.Domain.Entities
         public User User { get; set; }
 
         public int NotificationId { get; set; }
-        public Notification Notification { get; set; }
+        public Notifications Notification { get; set; }
 
         public bool IsRead { get; set; } = false;
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaskProjectManagement.Domain.Entities
 {
-    public class Authorization
+    public class Roles
     {
         public int AuthorizationId { get; set; }
         public string AuthorizationName { get; set; }
