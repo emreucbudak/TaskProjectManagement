@@ -35,9 +35,9 @@ namespace TaskProjectManagement.Persistence.Repositories
             return await GetByIdObj(b => b.UserId == id);
         }
 
-        public Task UpdateUser(User user)
+        public async Task UpdateUser(User user)
         {
-            throw new NotImplementedException();
+            await UpdateObj(user);
         }
     }
 }
