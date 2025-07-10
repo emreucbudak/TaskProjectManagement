@@ -13,6 +13,6 @@ namespace TaskProjectManagement.Application.Interfaces.Services
         Task RemoveMission(int miss);
         Task UpdateMigration (Mission miss);
         Task<Mission> GetMissionByIdFromService(int id);
-        Task<IEnumerable<Mission>> GetAllMissions();
+        Task<IEnumerable<Mission>> GetAllMissionsFromService();
     }
 }
