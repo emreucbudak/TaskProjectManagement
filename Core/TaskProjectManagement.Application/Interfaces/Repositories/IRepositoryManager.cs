@@ -16,5 +16,6 @@ namespace TaskProjectManagement.Application.Interfaces.Repositories
         public ITeamRepository teamRepository { get; }
         public IUserNotificationRepository userNotificationRepository { get; }
         public IUserRepository userRepository { get; }
+        public Task saveChangesAsync();
     }
 }
