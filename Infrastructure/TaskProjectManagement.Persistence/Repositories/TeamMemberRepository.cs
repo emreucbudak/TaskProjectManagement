@@ -10,7 +10,7 @@ using TaskProjectManagement.Persistence.ProjectDbContext;
 
 namespace TaskProjectManagement.Persistence.Repositories
 {
-    public class TeamMemberRepository : RepositoryBase<TeamMember>, ITeamMember
+    public class TeamMemberRepository : RepositoryBase<TeamMember>, ITeamMemberRepository
     {
         public TeamMemberRepository(ApplicationDbContext db) : base(db)
         {
