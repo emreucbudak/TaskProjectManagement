@@ -21,6 +21,7 @@ namespace TaskProjectManagement.Persistence.Services
         public async Task AddMission(Mission miss)
         {
            await _rp.missionRepository.AddMission(miss);
+            await _rp.saveChangesAsync();
         }
 
         public async Task<IEnumerable<Mission>> GetAllMissionsFromService(bool v)
@@ -39,10 +40,11 @@ namespace TaskProjectManagement.Persistence.Services
             await _rp.missionRepository.DeleteMission(getMissionForRemove);
         }
 
-        public async Task UpdateMigration(Mission miss)
+        public async Task UpdateMission(Mission miss)
         {
             var getMissionForUpdate = await _rp.missionRepository.GetMission(miss.MissionId);
             await _rp.missionRepository.DeleteMission(getMissionForUpdate);
+            await _rp.saveChangesAsync();
         }
     }
 }

@@ -28,6 +28,7 @@ namespace TaskProjectManagement.Persistence.Services
         {
             var getDemandForDelete = await _rp.demandRepository.GetDemandById(demandId);
             await _rp.demandRepository.DeleteDemand(getDemandForDelete);
+            await _rp.saveChangesAsync();
         }
 
         public async Task<IEnumerable<Demand>> GetAllDemandFromService(bool v)
@@ -46,6 +47,7 @@ namespace TaskProjectManagement.Persistence.Services
             updateDemand.DemandTitle = demand.DemandTitle;
             updateDemand.DemandDescription = demand.DemandDescription;
             await _rp.demandRepository.UpdateDemand(updateDemand);
+            await _rp.saveChangesAsync();
 
         }
     }

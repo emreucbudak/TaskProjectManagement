@@ -11,7 +11,7 @@ namespace TaskProjectManagement.Application.Interfaces.Services
     {
         Task AddMission(Mission miss);
         Task RemoveMission(int miss);
-        Task UpdateMigration (Mission miss);
+        Task UpdateMission (Mission miss);
         Task<Mission> GetMissionByIdFromService(int id);
         Task<IEnumerable<Mission>> GetAllMissionsFromService(bool v);
     }
