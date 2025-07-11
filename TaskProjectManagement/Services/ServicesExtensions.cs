@@ -33,7 +33,21 @@ namespace TaskProjectManagement.Services
         public static void RepositoryBaseInclude(this IServiceCollection services)
         {
             services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
-
+        }
+        public static void ServiceManage(this IServiceCollection services)
+        {
+            services.AddScoped<IDemandServices, DemandServices>();
+            services.AddScoped<IMissionService, MissionService>();
+            services.AddScoped<INotificationsService, NotificationService>();
+            services.AddScoped<ISubtaskServices,SubTaskService>();
+            services.AddScoped<ITeamMember, TeamMemberService>();
+            services.AddScoped<ITeamService, TeamService>();
+            services.AddScoped<IUserNotificationsServices,UserNotificationService>();
+            services.AddScoped<IUserServices,UserService>();
+        }
+        public static void ServiceBase(this IServiceCollection services)
+        {
+            services.AddScoped<IServiceManager, ServiceManager>();
         }
 
     }

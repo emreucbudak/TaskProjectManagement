@@ -15,6 +15,8 @@ builder.Services.ConfigureSql(builder.Configuration);
 builder.Services.RepositoryManage();
 builder.Services.RepositoryRegister();
 builder.Services.RepositoryBaseInclude();
+builder.Services.ServiceBase();
+builder.Services.ServiceManage();
 
 var app = builder.Build();
 
