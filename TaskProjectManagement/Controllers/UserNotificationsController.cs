@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TaskProjectManagement.Application.Interfaces.Services;
 using TaskProjectManagement.Domain.Entities;
 using TaskProjectManagement.Persistence.ProjectDbContext;
 
@@ -14,61 +15,31 @@ namespace TaskProjectManagement.Controllers
     [ApiController]
     public class UserNotificationsController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IServiceManager _context;
 
-        public UserNotificationsController(ApplicationDbContext context)
+        public UserNotificationsController(IServiceManager context)
         {
             _context = context;
         }
 
         // GET: api/UserNotifications
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserNotification>>> GetUsersNotification()
+        public async Task<ActionResult<IEnumerable<UserNotification>>> GetUsersNotification(int id)
         {
-            return await _context.UsersNotification.ToListAsync();
+            return Ok(await _context.userNotifications.getUserNotifications(id));
         }
 
-        // GET: api/UserNotifications/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<UserNotification>> GetUserNotification(int id)
-        {
-            var userNotification = await _context.UsersNotification.FindAsync(id);
 
-            if (userNotification == null)
-            {
-                return NotFound();
-            }
 
-            return userNotification;
-        }
 
         // PUT: api/UserNotifications/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUserNotification(int id, UserNotification userNotification)
+        public async Task<IActionResult> PutUserNotification( UserNotification userNotification)
         {
-            if (id != userNotification.UserId)
-            {
-                return BadRequest();
-            }
+            await _context.userNotifications.updateUserNotificationFromService(userNotification);
 
-            _context.Entry(userNotification).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserNotificationExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
 
             return NoContent();
         }
@@ -78,31 +49,12 @@ namespace TaskProjectManagement.Controllers
         [HttpPost]
         public async Task<ActionResult<UserNotification>> PostUserNotification(UserNotification userNotification)
         {
-            _context.UsersNotification.Add(userNotification);
-            await _context.SaveChangesAsync();
-
+            await _context.userNotifications.addUserNotificationFromService(userNotification.UserId,userNotification.NotificationId);
             return CreatedAtAction("GetUserNotification", new { id = userNotification.UserId }, userNotification);
         }
 
-        // DELETE: api/UserNotifications/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUserNotification(int id)
-        {
-            var userNotification = await _context.UsersNotification.FindAsync(id);
-            if (userNotification == null)
-            {
-                return NotFound();
-            }
 
-            _context.UsersNotification.Remove(userNotification);
-            await _context.SaveChangesAsync();
 
-            return NoContent();
-        }
 
-        private bool UserNotificationExists(int id)
-        {
-            return _context.UsersNotification.Any(e => e.UserId == id);
-        }
     }
 }
