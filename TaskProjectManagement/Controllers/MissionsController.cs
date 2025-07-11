@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TaskProjectManagement.Application.Interfaces.Services;
 using TaskProjectManagement.Domain.Entities;
 using TaskProjectManagement.Persistence.ProjectDbContext;
 
@@ -14,9 +15,9 @@ namespace TaskProjectManagement.Controllers
     [ApiController]
     public class MissionsController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IServiceManager _context;
 
-        public MissionsController(ApplicationDbContext context)
+        public MissionsController(IServiceManager context)
         {
             _context = context;
         }
@@ -25,50 +26,22 @@ namespace TaskProjectManagement.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Mission>>> GetMissions()
         {
-            return await _context.Missions.ToListAsync();
+            return Ok(await _context.mission.GetAllMissionsFromService(false));
         }
 
         // GET: api/Missions/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Mission>> GetMission(int id)
         {
-            var mission = await _context.Missions.FindAsync(id);
-
-            if (mission == null)
-            {
-                return NotFound();
-            }
-
-            return mission;
+            return Ok(await _context.mission.GetMissionByIdFromService(id));
         }
 
         // PUT: api/Missions/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMission(int id, Mission mission)
+        public async Task<IActionResult> PutMission(Mission mission)
         {
-            if (id != mission.MissionId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(mission).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!MissionExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _context.mission.UpdateMission(mission);
 
             return NoContent();
         }
@@ -78,9 +51,7 @@ namespace TaskProjectManagement.Controllers
         [HttpPost]
         public async Task<ActionResult<Mission>> PostMission(Mission mission)
         {
-            _context.Missions.Add(mission);
-            await _context.SaveChangesAsync();
-
+            await _context.mission.AddMission(mission);
             return CreatedAtAction("GetMission", new { id = mission.MissionId }, mission);
         }
 
@@ -88,21 +59,12 @@ namespace TaskProjectManagement.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMission(int id)
         {
-            var mission = await _context.Missions.FindAsync(id);
-            if (mission == null)
-            {
-                return NotFound();
-            }
 
-            _context.Missions.Remove(mission);
-            await _context.SaveChangesAsync();
 
+            await _context.mission.RemoveMission(id);
             return NoContent();
         }
 
-        private bool MissionExists(int id)
-        {
-            return _context.Missions.Any(e => e.MissionId == id);
-        }
+
     }
 }
