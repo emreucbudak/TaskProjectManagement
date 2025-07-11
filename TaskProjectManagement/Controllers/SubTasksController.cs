@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TaskProjectManagement.Application.Interfaces.Services;
 using TaskProjectManagement.Domain.Entities;
 using TaskProjectManagement.Persistence.ProjectDbContext;
 
@@ -14,9 +15,9 @@ namespace TaskProjectManagement.Controllers
     [ApiController]
     public class SubTasksController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IServiceManager _context;
 
-        public SubTasksController(ApplicationDbContext context)
+        public SubTasksController(IServiceManager context)
         {
             _context = context;
         }
@@ -25,52 +26,23 @@ namespace TaskProjectManagement.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SubTask>>> GetSubTasks()
         {
-            return await _context.SubTasks.ToListAsync();
+            return Ok(await _context.subtask.GetAllSubTasks(false));
         }
 
         // GET: api/SubTasks/5
         [HttpGet("{id}")]
         public async Task<ActionResult<SubTask>> GetSubTask(int id)
         {
-            var subTask = await _context.SubTasks.FindAsync(id);
-
-            if (subTask == null)
-            {
-                return NotFound();
-            }
-
-            return subTask;
+            return Ok(await _context.subtask.GetSubTaskFromService(id));
         }
 
         // PUT: api/SubTasks/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSubTask(int id, SubTask subTask)
+        public async Task<IActionResult> PutSubTask(SubTask subTask)
         {
-            if (id != subTask.SubTaskId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(subTask).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SubTaskExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            await _context.subtask.UpdateSubTaskFromService(subTask);
+            return Ok();
         }
 
         // POST: api/SubTasks
@@ -78,8 +50,8 @@ namespace TaskProjectManagement.Controllers
         [HttpPost]
         public async Task<ActionResult<SubTask>> PostSubTask(SubTask subTask)
         {
-            _context.SubTasks.Add(subTask);
-            await _context.SaveChangesAsync();
+            await _context.subtask.AddSubTaskFromService(subTask);
+
 
             return CreatedAtAction("GetSubTask", new { id = subTask.SubTaskId }, subTask);
         }
@@ -88,21 +60,11 @@ namespace TaskProjectManagement.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSubTask(int id)
         {
-            var subTask = await _context.SubTasks.FindAsync(id);
-            if (subTask == null)
-            {
-                return NotFound();
-            }
-
-            _context.SubTasks.Remove(subTask);
-            await _context.SaveChangesAsync();
+            await _context.subtask.RemoveSubTaskFromService(id);
 
             return NoContent();
         }
 
-        private bool SubTaskExists(int id)
-        {
-            return _context.SubTasks.Any(e => e.SubTaskId == id);
-        }
+
     }
 }
