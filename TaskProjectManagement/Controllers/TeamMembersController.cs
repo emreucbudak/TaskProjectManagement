@@ -31,7 +31,7 @@ namespace TaskProjectManagement.Controllers
 
         // GET: api/TeamMembers/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<TeamMember>> GetTeamMember(int id)
+        public async Task<ActionResult<TeamMember>> GetTeamMembers(int id)
         {
             var teamName = await _context.teamMember.GetMemberFromService(id);
             return Ok(teamName);
