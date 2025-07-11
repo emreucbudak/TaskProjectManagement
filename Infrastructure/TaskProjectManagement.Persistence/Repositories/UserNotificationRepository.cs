@@ -17,12 +17,12 @@ namespace TaskProjectManagement.Persistence.Repositories
 
         public async Task AddUserNotification(int UserId, int NotificationsId)
         {
-            var user = new UserNotification()
+            var userNotification = new UserNotification()
             {
                 UserId = UserId,
                 NotificationId = NotificationsId
             };
-            await AddObj(user);
+            await AddObj(userNotification);
         }
 
         public async Task DeleteNotification(int NotificationsId)
@@ -38,6 +38,13 @@ namespace TaskProjectManagement.Persistence.Repositories
             
 
  
+        }
+
+
+
+        public async Task  UpdateUserNotifications (UserNotification notification)
+        {
+            await UpdateObj(notification);
         }
 
 

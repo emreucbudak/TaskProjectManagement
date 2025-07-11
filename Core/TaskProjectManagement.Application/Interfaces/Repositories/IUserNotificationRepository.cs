@@ -12,6 +12,7 @@ namespace TaskProjectManagement.Application.Interfaces.Repositories
         Task AddUserNotification(int UserId, int NotificationsId);
         Task DeleteNotification (int NotificationsId);
         Task<IEnumerable<UserNotification>> GetAllNotifications(int id);
+        Task UpdateUserNotifications(UserNotification usr);
 
     }
 }

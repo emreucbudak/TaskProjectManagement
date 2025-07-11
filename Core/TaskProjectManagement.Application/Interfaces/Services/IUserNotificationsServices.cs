@@ -9,10 +9,10 @@ namespace TaskProjectManagement.Application.Interfaces.Services
 {
     public interface IUserNotificationsServices
     {
-        Task addUserNotificationFromService (UserNotification userNotification);
-        Task removeUserNotificationFromService(int id);
+        Task addUserNotificationFromService (int userId, int notificationId);
+
         Task updateUserNotificationFromService(UserNotification usr);
-        Task<UserNotification> getUserNotificationFromService (int id);
-        Task<IEnumerable<UserNotification>> getUserNotifications(bool v);
+  
+        Task<IEnumerable<UserNotification>> getUserNotifications(int v);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaskProjectManagement.Application.Interfaces.Repositories;
 using TaskProjectManagement.Application.Interfaces.Services;
 using TaskProjectManagement.Domain.Entities;
 
@@ -10,29 +11,47 @@ namespace TaskProjectManagement.Persistence.Services
 {
     public class UserNotificationService : IUserNotificationsServices
     {
-        public Task addUserNotificationFromService(UserNotification userNotification)
+        private readonly IRepositoryManager _rp;
+
+        public UserNotificationService(IRepositoryManager rp)
         {
-            throw new NotImplementedException();
+            _rp = rp;
         }
 
-        public Task<UserNotification> getUserNotificationFromService(int id)
+        public async Task addUserNotificationFromService(int userId,int notificationId)
         {
-            throw new NotImplementedException();
+            await _rp.userNotificationRepository.AddUserNotification(userId,notificationId);
         }
 
-        public Task<IEnumerable<UserNotification>> getUserNotifications(bool v)
+
+
+        public async Task<IEnumerable<UserNotification>> getUserNotifications(int v)
         {
-            throw new NotImplementedException();
+           return await _rp.userNotificationRepository.GetAllNotifications(v);
         }
 
-        public Task removeUserNotificationFromService(int id)
+        public async Task removeUserNotificationFromService(int notificationsId)
         {
-            throw new NotImplementedException();
+            var removeUserNotification = await _rp.userNotificationRepository.GetAllNotifications(notificationsId);
+            var chooseNotification = removeUserNotification.Where(b => b.NotificationId == notificationsId).FirstOrDefault();
+            if (chooseNotification != null) {
+                await _rp.userNotificationRepository.DeleteNotification(chooseNotification.NotificationId);
+                await _rp.saveChangesAsync();  
+            }
+            
         }
 
-        public Task updateUserNotificationFromService(UserNotification usr)
+        public async Task updateUserNotificationFromService(UserNotification usr)
         {
-            throw new NotImplementedException();
+            var updateUserNotification = await _rp.userNotificationRepository.GetAllNotifications(usr.UserId);
+            var mustChangeNotification = updateUserNotification.Where(b => b.NotificationId == usr.NotificationId).FirstOrDefault();
+            if (mustChangeNotification != null) {
+                mustChangeNotification.Notification.NotificationText = usr.Notification.NotificationText;
+                mustChangeNotification.Notification.NotificationTitle = usr.Notification.NotificationTitle;
+                await _rp.userNotificationRepository.UpdateUserNotifications(mustChangeNotification);
+                await _rp.saveChangesAsync();   
+            }
+
         }
     }
 }
