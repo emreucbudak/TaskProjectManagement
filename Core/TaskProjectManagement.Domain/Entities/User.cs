@@ -16,6 +16,7 @@ namespace TaskProjectManagement.Domain.Entities
         public string Password { get; set; }
         public int AuthorizationId { get; set; }
         public Roles Authorization { get; set; }
+        public int CreatedTeamId { get; set; }
         public Team CreatedTeam { get; set; }
         public ICollection<Demand> Demands { get; set; }
         public int? CreatedById { get; set; }

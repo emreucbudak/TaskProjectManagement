@@ -7,7 +7,7 @@ using TaskProjectManagement.Domain.Entities;
 
 namespace TaskProjectManagement.Application.Interfaces.Repositories
 {
-    public interface ITeamMember
+    public interface ITeamMemberRepository
     {
         Task AddMember(int teamID, int userID);
         Task DeleteMember(int teamID, int userID);
