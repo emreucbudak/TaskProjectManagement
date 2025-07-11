@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaskProjectManagement.Application.Interfaces.Repositories;
 using TaskProjectManagement.Application.Interfaces.Services;
 using TaskProjectManagement.Domain.Entities;
 
@@ -10,29 +11,44 @@ namespace TaskProjectManagement.Persistence.Services
 {
     public class TeamService : ITeamService
     {
-        public Task AddTeam()
+        private readonly IRepositoryManager _rp;
+
+        public TeamService(IRepositoryManager rp)
         {
-            throw new NotImplementedException();
+            _rp = rp;
         }
 
-        public Task<IEnumerable<Team>> GetAllTeams(bool v)
+        public async Task AddTeam(Team team)
         {
-            throw new NotImplementedException();
+           await _rp.teamRepository.AddTeam(team);
+           await _rp.saveChangesAsync();
         }
 
-        public Task<Team> GetTeamById(int teamId)
+        public async Task<IEnumerable<Team>> GetAllTeams(bool v)
         {
-            throw new NotImplementedException();
+            return await _rp.teamRepository.GetAllTeams(v);
         }
 
-        public Task RemoveTeam(int teamId)
+        public async Task<Team> GetTeamById(int teamId)
         {
-            throw new NotImplementedException();
+            return await _rp.teamRepository.GetTeamById(teamId);
         }
 
-        public Task UpdateTeamFromService(Team team)
+        public async Task RemoveTeam(int teamId)
         {
-            throw new NotImplementedException();
+            var getTeamForRemove = await _rp.teamRepository.GetTeamById(teamId);
+            await _rp.teamRepository.RemoveTeam(getTeamForRemove);
+            await _rp.saveChangesAsync();
+        }
+
+        public async Task UpdateTeamFromService(Team team)
+        {
+            var getTeamForUpdate = await _rp.teamRepository.GetTeamById(team.TeamId);
+            getTeamForUpdate.TeamName = team.TeamName;
+            await _rp.teamRepository.UpdateTeam(getTeamForUpdate);
+            await _rp.saveChangesAsync();
+
+            
         }
     }
 }

@@ -9,7 +9,7 @@ namespace TaskProjectManagement.Application.Interfaces.Services
 {
     public interface ITeamService
     {
-        Task AddTeam();
+        Task AddTeam(Team team);
         Task RemoveTeam(int teamId);
         Task<IEnumerable<Team>> GetAllTeams(bool v);
         Task<Team> GetTeamById(int teamId);

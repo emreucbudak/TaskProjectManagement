@@ -12,7 +12,7 @@ namespace TaskProjectManagement.Application.Interfaces.Repositories
         Task AddTeam(Team team);
         Task RemoveTeam(Team team);
         Task UpdateTeam(Team team);
-        Task<IEnumerable<Team>> GetAllTeams();
+        Task<IEnumerable<Team>> GetAllTeams(bool v);
         Task<Team> GetTeamById(int id);
     }
 }

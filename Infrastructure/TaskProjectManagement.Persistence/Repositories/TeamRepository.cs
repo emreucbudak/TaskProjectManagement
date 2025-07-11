@@ -20,9 +20,9 @@ namespace TaskProjectManagement.Persistence.Repositories
             await AddObj(team);
         }
 
-        public async Task<IEnumerable<Team>> GetAllTeams()
+        public async Task<IEnumerable<Team>> GetAllTeams(bool v)
         {
-            return await GetAllObj(false);
+            return await GetAllObj(v);
         }
 
         public async Task<Team> GetTeamById(int id)
