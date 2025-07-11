@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TaskProjectManagement.Application.Interfaces.Services;
 using TaskProjectManagement.Domain.Entities;
 using TaskProjectManagement.Persistence.ProjectDbContext;
 
@@ -14,9 +15,9 @@ namespace TaskProjectManagement.Controllers
     [ApiController]
     public class DemandsController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IServiceManager _context;
 
-        public DemandsController(ApplicationDbContext context)
+        public DemandsController(IServiceManager context)
         {
             _context = context;
         }
@@ -25,50 +26,28 @@ namespace TaskProjectManagement.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Demand>>> GetDemands()
         {
-            return await _context.Demands.ToListAsync();
+            var x =  await _context.demand.GetAllDemandFromService(false);
+            return Ok(x);
         }
 
         // GET: api/Demands/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Demand>> GetDemand(int id)
         {
-            var demand = await _context.Demands.FindAsync(id);
-
-            if (demand == null)
-            {
-                return NotFound();
-            }
-
-            return demand;
+            var demand = await _context.demand.GetOneDemandFromService(id);
+            return Ok(demand);
         }
 
         // PUT: api/Demands/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDemand(int id, Demand demand)
+        public async Task<IActionResult> PutDemand(Demand demand)
         {
-            if (id != demand.DemandId)
-            {
-                return BadRequest();
+            var demandUpdate = await _context.demand.GetOneDemandFromService(demand.DemandId);
+            if (demandUpdate != null) {
+                await _context.demand.UpdateDemandFromService(demandUpdate);
             }
 
-            _context.Entry(demand).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!DemandExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
 
             return NoContent();
         }
@@ -78,31 +57,22 @@ namespace TaskProjectManagement.Controllers
         [HttpPost]
         public async Task<ActionResult<Demand>> PostDemand(Demand demand)
         {
-            _context.Demands.Add(demand);
-            await _context.SaveChangesAsync();
+            if (demand != null) {
+                await _context.demand.AddDemandFromService(demand);
 
-            return CreatedAtAction("GetDemand", new { id = demand.DemandId }, demand);
+            }
+
+            return Ok();
         }
 
         // DELETE: api/Demands/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDemand(int id)
         {
-            var demand = await _context.Demands.FindAsync(id);
-            if (demand == null)
-            {
-                return NotFound();
-            }
-
-            _context.Demands.Remove(demand);
-            await _context.SaveChangesAsync();
-
+            await _context.demand.DeleteDemandFromService(id);
             return NoContent();
         }
 
-        private bool DemandExists(int id)
-        {
-            return _context.Demands.Any(e => e.DemandId == id);
-        }
+
     }
 }
