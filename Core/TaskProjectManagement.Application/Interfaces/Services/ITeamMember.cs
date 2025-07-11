@@ -10,9 +10,8 @@ namespace TaskProjectManagement.Application.Interfaces.Services
     public interface ITeamMember
     {
         Task AddMemberFromService(TeamMember teamMember);
-        Task DeleteMemberFromService(int id);
-        Task UpdateMemberFromService(TeamMember member);
-        Task<TeamMember> GetMemberFromService(int id);
-        Task<IEnumerable<TeamMember>> GetAllMembersFromService(bool v);
+        Task DeleteMemberFromService(int teamId,int id);
+        Task<TeamMember> GetMemberFromService(int userId);
+        Task<IEnumerable<TeamMember>> GetAllMembersFromService(int teamId);
     }
 }
