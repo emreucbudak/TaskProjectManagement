@@ -25,9 +25,9 @@ namespace TaskProjectManagement.Persistence.Repositories
             await DeleteObj(task);
         }
 
-        public async Task<IEnumerable<SubTask>> GetAllSubtasks()
+        public async Task<IEnumerable<SubTask>> GetAllSubtasks(bool v)
         {
-            return await GetAllObj(false);
+            return await GetAllObj(v);
         }
 
         public async Task<SubTask> GetSubTaskById(int id)

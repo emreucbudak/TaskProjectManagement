@@ -13,7 +13,7 @@ namespace TaskProjectManagement.Application.Interfaces.Services
         Task RemoveSubTaskFromService(int id);
         Task UpdateSubTaskFromService(SubTask subTask);
         Task<SubTask> GetSubTaskFromService (int id);
-        Task<IEnumerable<SubTask>> GetAllSubTasks ();
+        Task<IEnumerable<SubTask>> GetAllSubTasks (bool v);
 
     }
 
