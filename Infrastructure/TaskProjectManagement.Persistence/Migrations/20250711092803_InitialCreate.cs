@@ -154,7 +154,8 @@ namespace TaskProjectManagement.Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TeamName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatorId = table.Column<int>(type: "int", nullable: false),
-                    MissionId = table.Column<int>(type: "int", nullable: false)
+                    MissionId = table.Column<int>(type: "int", nullable: false),
+                    MemberCount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

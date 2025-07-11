@@ -20,7 +20,8 @@ namespace TaskProjectManagement.Persistence.Services
 
         public async Task AddTeam(Team team)
         {
-           await _rp.teamRepository.AddTeam(team);
+           team.MemberCount = 0;
+            await _rp.teamRepository.AddTeam(team);
            await _rp.saveChangesAsync();
         }
 

@@ -12,7 +12,7 @@ using TaskProjectManagement.Persistence.ProjectDbContext;
 namespace TaskProjectManagement.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250711062213_InitialCreate")]
+    [Migration("20250711092803_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -230,6 +230,9 @@ namespace TaskProjectManagement.Persistence.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TeamId"));
 
                     b.Property<int>("CreatorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MemberCount")
                         .HasColumnType("int");
 
                     b.Property<int>("MissionId")

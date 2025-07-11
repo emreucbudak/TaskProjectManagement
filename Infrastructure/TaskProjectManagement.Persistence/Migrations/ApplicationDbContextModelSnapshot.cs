@@ -229,6 +229,9 @@ namespace TaskProjectManagement.Persistence.Migrations
                     b.Property<int>("CreatorId")
                         .HasColumnType("int");
 
+                    b.Property<int>("MemberCount")
+                        .HasColumnType("int");
+
                     b.Property<int>("MissionId")
                         .HasColumnType("int");
 
