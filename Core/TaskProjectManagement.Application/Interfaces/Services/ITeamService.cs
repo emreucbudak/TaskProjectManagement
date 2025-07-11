@@ -13,6 +13,6 @@ namespace TaskProjectManagement.Application.Interfaces.Services
         Task RemoveTeam(int teamId);
         Task<IEnumerable<Team>> GetAllTeams(bool v);
         Task<Team> GetTeamById(int teamId);
-        Task UpdateTeamFromService(Team team);
+        Task UpdateTeamFromService(Team team);  
     }
 }
