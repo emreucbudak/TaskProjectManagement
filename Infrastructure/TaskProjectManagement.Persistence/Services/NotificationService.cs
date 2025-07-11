@@ -24,24 +24,29 @@ namespace TaskProjectManagement.Persistence.Services
             await _rp.saveChangesAsync();
         }
 
-        public Task<IEnumerable<Notifications>> GetAllNotificationsFromService()
+        public async Task<IEnumerable<Notifications>> GetAllNotificationsFromService(bool v)
         {
-            throw new NotImplementedException();
+            return await _rp.notificationRepository.GetAllNotifications(v);
         }
 
-        public Task<Notifications> GetNotificationsFromService()
+        public async Task<Notifications> GetNotificationsFromService(int id)
         {
-            throw new NotImplementedException();
+            return await _rp.notificationRepository.GetNotificationsById(id);
         }
 
-        public Task RemoveNotificationFromService(int ntfc)
+        public async Task RemoveNotificationFromService(int ntfc)
         {
-            throw new NotImplementedException();
+            var getNotificationForDelete = await _rp.notificationRepository.GetNotificationsById(ntfc);
+            await _rp.notificationRepository.RemoveNotification(getNotificationForDelete);
         }
 
-        public Task UpdateNotificationFromService(Notifications ntfc)
+        public async Task UpdateNotificationFromService(Notifications ntfc)
         {
-            throw new NotImplementedException();
+            var getNotificationForUpdate = await _rp.notificationRepository.GetNotificationsById(ntfc.NotificationId);
+            getNotificationForUpdate.NotificationText = ntfc.NotificationText;
+            getNotificationForUpdate.NotificationTitle = ntfc.NotificationTitle;
+            await _rp.notificationRepository.UpdateNotification(getNotificationForUpdate);
+            await _rp.saveChangesAsync();
         }
     }
 }

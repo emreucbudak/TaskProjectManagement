@@ -12,7 +12,7 @@ namespace TaskProjectManagement.Application.Interfaces.Repositories
         Task AddNotification(Notifications ntfc);
         Task RemoveNotification(Notifications ntfc);
         Task UpdateNotification (Notifications ntfc);
-        Task<IEnumerable<Notifications>> GetAllNotifications();
+        Task<IEnumerable<Notifications>> GetAllNotifications(bool v);
         Task<Notifications> GetNotificationsById(int id);
     }
 }

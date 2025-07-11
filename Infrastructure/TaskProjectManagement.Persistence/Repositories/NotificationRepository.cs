@@ -20,9 +20,9 @@ namespace TaskProjectManagement.Persistence.Repositories
             await AddObj(ntfc);
         }
 
-        public async Task<IEnumerable<Notifications>> GetAllNotifications()
+        public async Task<IEnumerable<Notifications>> GetAllNotifications(bool v)
         {
-            return await GetAllObj(false);
+            return await GetAllObj(v);
         }
 
         public async Task<Notifications> GetNotificationsById(int id)

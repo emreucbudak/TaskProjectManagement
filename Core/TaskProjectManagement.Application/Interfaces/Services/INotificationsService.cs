@@ -12,7 +12,7 @@ namespace TaskProjectManagement.Application.Interfaces.Services
         Task AddNotificationFromService(Notifications ntfc);
         Task RemoveNotificationFromService(int ntfc);
         Task UpdateNotificationFromService(Notifications ntfc);
-        Task<Notifications> GetNotificationsFromService();
-        Task<IEnumerable<Notifications>> GetAllNotificationsFromService();
+        Task<Notifications> GetNotificationsFromService(int id);
+        Task<IEnumerable<Notifications>> GetAllNotificationsFromService(bool v);
     }
 }
