@@ -11,7 +11,7 @@ namespace TaskProjectManagement.Application.Interfaces.Repositories
     {
         Task AddMission(Mission mission);
         Task DeleteMission(Mission mission);
-        Task<IEnumerable<Mission>> GetAllMissions();
+        Task<IEnumerable<Mission>> GetAllMissions(bool v);
         Task UpdateMissions (Mission mission);
         Task<Mission> GetMission (int id);
     }

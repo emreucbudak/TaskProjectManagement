@@ -25,9 +25,9 @@ namespace TaskProjectManagement.Persistence.Repositories
             await DeleteObj(mission);
         }
 
-        public async Task<IEnumerable<Mission>> GetAllMissions()
+        public async Task<IEnumerable<Mission>> GetAllMissions(bool v)
         {
-            return await GetAllObj(false);
+            return await GetAllObj(v);
         }
 
         public async Task<Mission> GetMission(int id)
