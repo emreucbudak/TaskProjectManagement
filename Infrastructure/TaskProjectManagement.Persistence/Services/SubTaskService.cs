@@ -47,7 +47,8 @@ namespace TaskProjectManagement.Persistence.Services
             var getSubTaskForUpdate = await rp.subTaskRepository.GetSubTaskById(subTask.SubTaskId);
             getSubTaskForUpdate.TaskName = subTask.TaskName;
             getSubTaskForUpdate.TaskDescription = subTask.TaskDescription;
-            getSubTaskForUpdate.SubStatus.Status = subTask.SubStatus.Status;
+            getSubTaskForUpdate.IsComplete = subTask.IsComplete;
+
             await rp.subTaskRepository.UpdateSubtask(getSubTaskForUpdate);
             await rp.saveChangesAsync();
 

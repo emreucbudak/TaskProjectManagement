@@ -28,9 +28,9 @@ namespace TaskProjectManagement.Persistence.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<User>> GetAllUsers(bool v)
+        public async Task<IEnumerable<User>> GetAllUsers(bool v)
         {
-            throw new NotImplementedException();
+            return await _rp.userRepository.GetAllUsers(v);
         }
 
         public Task<User> GetUserById(int id)

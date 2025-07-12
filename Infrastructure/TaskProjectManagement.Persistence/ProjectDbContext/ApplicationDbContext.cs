@@ -30,9 +30,12 @@ namespace TaskProjectManagement.Persistence.ProjectDbContext
             modelBuilder.Entity<Demand>().Property(b => b.IsConfirmed).HasDefaultValue(false);
             modelBuilder.Entity<Mission>().Property(b=> b.IsCompleted).HasDefaultValue(false);
             modelBuilder.Entity<SubTask>().Property(b => b.IsComplete).HasDefaultValue(false);
+            modelBuilder.Entity<Mission>().HasOne(b => b.Team).WithOne(b => b.Mission).HasForeignKey<Mission>(b => b.TeamId);
+            modelBuilder.Entity<TeamLeader>().HasOne(b => b.Team).WithOne(b => b.teamLeader).HasForeignKey<TeamLeader>(b => b.TeamId);
+            modelBuilder.Entity<WorkerNotification>().HasKey(b=> b.WorkerNotificationId);
+            modelBuilder.Entity<Demand>().HasOne(b=> b.Team).WithMany(b=> b.Demands).OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Demand>().HasOne(b => b.Worker).WithMany(b => b.Demands).OnDelete(DeleteBehavior.Restrict);
 
-            
-            
         }
 
 
