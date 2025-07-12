@@ -5,12 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using TaskProjectManagement.Application.Interfaces.Repositories;
 using TaskProjectManagement.Domain.Entities;
+using TaskProjectManagement.Persistence.ProjectDbContext;
 
 namespace TaskProjectManagement.Persistence.Repositories
 {
     public class WorkerRepository : RepositoryBase<Worker>, IWorkerRepository
     {
-        
+        public WorkerRepository(ApplicationDbContext db) : base(db)
+        {
+        }
+
         public async Task AddWorker(Worker worker)
         {
            await AddObj(worker);
