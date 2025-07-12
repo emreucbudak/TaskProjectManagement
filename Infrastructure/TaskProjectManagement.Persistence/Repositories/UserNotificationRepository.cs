@@ -9,7 +9,7 @@ using TaskProjectManagement.Persistence.ProjectDbContext;
 
 namespace TaskProjectManagement.Persistence.Repositories
 {
-    public class UserNotificationRepository : RepositoryBase<UserNotification>, IUserNotificationRepository
+    public class UserNotificationRepository : RepositoryBase<WorkerNotification>, IUserNotificationRepository
     {
         public UserNotificationRepository(ApplicationDbContext db) : base(db)
         {
@@ -17,7 +17,7 @@ namespace TaskProjectManagement.Persistence.Repositories
 
         public async Task AddUserNotification(int UserId, int NotificationsId)
         {
-            var userNotification = new UserNotification()
+            var userNotification = new WorkerNotification()
             {
                 UserId = UserId,
                 NotificationId = NotificationsId
@@ -32,7 +32,7 @@ namespace TaskProjectManagement.Persistence.Repositories
                
         }
 
-        public async Task<IEnumerable<UserNotification>> GetAllNotifications(int id)
+        public async Task<IEnumerable<WorkerNotification>> GetAllNotifications(int id)
         {
            return await GetAllNotificationsByUserId(id);
             
@@ -42,13 +42,13 @@ namespace TaskProjectManagement.Persistence.Repositories
 
 
 
-        public async Task  UpdateUserNotifications (UserNotification notification)
+        public async Task  UpdateUserNotifications (WorkerNotification notification)
         {
             await UpdateObj(notification);
         }
 
 
-        private async Task<IEnumerable<UserNotification>> GetAllNotificationsByUserId (int id )
+        private async Task<IEnumerable<WorkerNotification>> GetAllNotificationsByUserId (int id )
         {
             var x = await GetAllObj(false);
             return x.Where(x=>x.UserId == id);

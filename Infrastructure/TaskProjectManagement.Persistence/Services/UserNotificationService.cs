@@ -25,7 +25,7 @@ namespace TaskProjectManagement.Persistence.Services
 
 
 
-        public async Task<IEnumerable<UserNotification>> getUserNotifications(int v)
+        public async Task<IEnumerable<WorkerNotification>> getUserNotifications(int v)
         {
            return await _rp.userNotificationRepository.GetAllNotifications(v);
         }
@@ -33,21 +33,21 @@ namespace TaskProjectManagement.Persistence.Services
         public async Task removeUserNotificationFromService(int notificationsId)
         {
             var removeUserNotification = await _rp.userNotificationRepository.GetAllNotifications(notificationsId);
-            var chooseNotification = removeUserNotification.Where(b => b.NotificationId == notificationsId).FirstOrDefault();
+            var chooseNotification = removeUserNotification.Where(b => b.NotificationsId == notificationsId).FirstOrDefault();
             if (chooseNotification != null) {
-                await _rp.userNotificationRepository.DeleteNotification(chooseNotification.NotificationId);
+                await _rp.userNotificationRepository.DeleteNotification(chooseNotification.NotificationsId);
                 await _rp.saveChangesAsync();  
             }
             
         }
 
-        public async Task updateUserNotificationFromService(UserNotification usr)
+        public async Task updateUserNotificationFromService(WorkerNotification usr)
         {
             var updateUserNotification = await _rp.userNotificationRepository.GetAllNotifications(usr.UserId);
-            var mustChangeNotification = updateUserNotification.Where(b => b.NotificationId == usr.NotificationId).FirstOrDefault();
+            var mustChangeNotification = updateUserNotification.Where(b => b.NotificationsId == usr.NotificationsId).FirstOrDefault();
             if (mustChangeNotification != null) {
-                mustChangeNotification.Notification.NotificationText = usr.Notification.NotificationText;
-                mustChangeNotification.Notification.NotificationTitle = usr.Notification.NotificationTitle;
+                mustChangeNotification.Notifications.NotificationText = usr.Notifications.NotificationText;
+                mustChangeNotification.Notifications.NotificationTitle = usr.Notifications.NotificationTitle;
                 await _rp.userNotificationRepository.UpdateUserNotifications(mustChangeNotification);
                 await _rp.saveChangesAsync();   
             }
