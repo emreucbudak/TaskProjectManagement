@@ -21,9 +21,7 @@ namespace TaskProjectManagement.Services
             services.AddScoped<IMissionRepository,MissionRepository>();
             services.AddScoped<INotificationRepository,NotificationRepository>();
             services.AddScoped<ISubTaskRepository,SubTaskRepository>();
-            services.AddScoped<ITeamMemberRepository,TeamMemberRepository>();
             services.AddScoped<ITeamRepository,TeamRepository>();
-            services.AddScoped<IUserNotificationRepository,UserNotificationRepository>();
             services.AddScoped<IUserServices, UserService>();
         }
         public static void RepositoryManage(this IServiceCollection services)
@@ -40,9 +38,7 @@ namespace TaskProjectManagement.Services
             services.AddScoped<IMissionService, MissionService>();
             services.AddScoped<INotificationsService, NotificationService>();
             services.AddScoped<ISubtaskServices,SubTaskService>();
-            services.AddScoped<ITeamMember, TeamMemberService>();
             services.AddScoped<ITeamService, TeamService>();
-            services.AddScoped<IUserNotificationsServices,UserNotificationService>();
             services.AddScoped<IUserServices,UserService>();
         }
         public static void ServiceBase(this IServiceCollection services)

@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskProjectManagement.Appli
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskProjectManagement.Persistence", "Infrastructure\TaskProjectManagement.Persistence\TaskProjectManagement.Persistence.csproj", "{A86D46DA-B14D-4694-B546-8BF609B5E9F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskProjectManagement", "TaskProjectManagement\TaskProjectManagement.csproj", "{E717F8CE-B9FB-401F-8236-5A9F52B9A6AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskProjectManagement", "TaskProjectManagement\TaskProjectManagement.csproj", "{E717F8CE-B9FB-401F-8236-5A9F52B9A6AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

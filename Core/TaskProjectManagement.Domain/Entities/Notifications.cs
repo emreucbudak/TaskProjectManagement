@@ -14,6 +14,8 @@ namespace TaskProjectManagement.Domain.Entities
         public string NotificationTitle { get; set; }
         public string NotificationText { get; set; }
 
-        public ICollection<UserNotification> UserNotifications { get; set; }
+        public int SenderId {  get; set; }
+        public TeamLeader Sender { get; set; }
+        public ICollection<WorkerNotification> WorkerNotifications { get; set; }
     }
 }

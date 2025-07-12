@@ -24,9 +24,10 @@ namespace TaskProjectManagement.Controllers
 
         // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<User>>> GetUsers(bool v)
         {
-            return Ok(await _context.users.GetAllUsers(false));
+            var allUser = await _context.users.GetAllUsers(v);
+            return Ok(allUser);
         }
 
         // GET: api/Users/5

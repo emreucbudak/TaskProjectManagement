@@ -11,10 +11,11 @@ namespace TaskProjectManagement.Domain.Entities
         public int DemandId { get; set; }
         public string DemandTitle { get; set; }
         public string DemandDescription { get; set; }
-        public int StatusId { get; set; }
-        public DemandStatus Status { get; set; }
-        public int UserId { get; set; }
-        public User User { get; set; }
+        public bool IsConfirmed { get; set; }
+        public int teamLeaderId { get; set; }
+        public TeamLeader teamLeader { get; set; }
+        public int WorkerId { get; set; }
+        public Worker Worker { get; set; }
         public int TeamId { get; set; }
         public Team Team { get; set; }
         public DateTime CreatedAt { get; set; }

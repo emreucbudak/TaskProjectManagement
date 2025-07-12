@@ -12,9 +12,8 @@ namespace TaskProjectManagement.Application.Interfaces.Services
         public IMissionService mission { get; }
         public INotificationsService notificationsService { get; }
         public ISubtaskServices subtask { get; }
-        public ITeamMember teamMember { get; }
         public ITeamService teamService { get; }
-        public IUserNotificationsServices userNotifications { get; }    
+    
         public IUserServices users { get; }
     }
 }

@@ -14,18 +14,12 @@ namespace TaskProjectManagement.Domain.Entities
         public string Surname   { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public int AuthorizationId { get; set; }
-        public Roles Authorization { get; set; }
-        public int CreatedTeamId { get; set; }
-        public Team CreatedTeam { get; set; }
-        public ICollection<Demand> Demands { get; set; }
-        public int? CreatedById { get; set; }
-        public User? CreatedBy { get; set; }
-        public ICollection<User>? CreatedUsers { get; set; }
-        public int TeamId   { get; set; }
-        public Team Team { get; set; }
 
-        public ICollection<UserNotification>? UserNotifications { get; set; }
+
+        public ICollection<Worker>? CreatedWorkers { get; set; }
+        
+
+
 
     }
 }

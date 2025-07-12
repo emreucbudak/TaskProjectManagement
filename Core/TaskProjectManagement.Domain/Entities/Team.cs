@@ -10,13 +10,14 @@ namespace TaskProjectManagement.Domain.Entities
     {
         public int TeamId { get; set; }
         public string TeamName { get; set; }
-        public int CreatorId { get; set; }
-        public User Creator { get; set; }
-        public ICollection<TeamMember> Member { get; set; }
+        public int teamLeaderId { get; set; }
+        public TeamLeader teamLeader { get; set; }
+        public ICollection<Worker> Worker { get; set; }
         public ICollection<Demand> Demands { get; set; }
         public int MissionId { get; set; }
         public Mission Mission { get; set; }
         public int MemberCount { get; set; } = 0;
+        public bool IsOpen { get; set; }
 
 
 

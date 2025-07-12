@@ -12,7 +12,7 @@ namespace TaskProjectManagement.Application.Interfaces.Repositories
         Task AddUser (User user);
         Task UpdateUser (User user);
         Task DeleteUser (User user);
-        Task<IEnumerable<User>> GetAllUsers ();
+        Task<IEnumerable<User>> GetAllUsers (bool v);
         Task<User> GetUserById (int id);
     }
 }

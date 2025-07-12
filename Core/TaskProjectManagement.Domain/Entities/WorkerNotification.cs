@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace TaskProjectManagement.Domain.Entities
 {
-    public class TeamMember
+    public class WorkerNotification
     {
-        public int Id { get; set; }
-        public int TeamId { get; set; }
-        public Team Team { get; set; }
+        public int WorkerNotificationId { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
+        public int NotificationsId { get; set; }
+        public Notifications Notifications { get; set; }
     }
 }

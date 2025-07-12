@@ -11,10 +11,9 @@ namespace TaskProjectManagement.Domain.Entities
         public int SubTaskId    { get; set; }
         public string TaskName { get; set; }
         public string TaskDescription { get; set; }
-        public int UserId { get; set; }
-        public User User { get; set; }
-        public int SubStatusId { get; set; }
-        public SubTaskStatus SubStatus { get; set; }
+        public int WorkerId { get; set; }
+        public Worker Worker { get; set; }
+        public bool IsComplete { get; set; }
 
     }
 }
