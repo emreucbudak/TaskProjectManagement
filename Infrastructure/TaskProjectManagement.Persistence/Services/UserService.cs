@@ -49,6 +49,7 @@ namespace TaskProjectManagement.Persistence.Services
             getUserForUpdate.Surname = user.Surname;
             getUserForUpdate.Email = user.Email;
             getUserForUpdate.Name = user.Name;
+            getUserForUpdate.Password = BCrypt.Net.BCrypt.EnhancedHashPassword(user.Password);
             await _rp.userRepository.UpdateUser(getUserForUpdate);
             await _rp.saveChangesAsync();
 
