@@ -25,9 +25,9 @@ namespace TaskProjectManagement.Persistence.Repositories
             await DeleteObj(user);
         }
 
-        public async Task<IEnumerable<User>> GetAllUsers(bool v)
+        public async Task<IEnumerable<User>> GetAllUsers()
         {
-            return await GetAllObj(v);
+            return await GetAllObj(false);
         }
 
         public async Task<User> GetUserById(int id)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BCrypt.Net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,29 +19,39 @@ namespace TaskProjectManagement.Persistence.Services
             _rp = rp;
         }
 
-        public Task AddUserFromService(User user)
+        public async Task AddUserFromService(User user)
         {
-            throw new NotImplementedException();
+            user.Password = BCrypt.Net.BCrypt.EnhancedHashPassword(user.Password);
+            await _rp.userRepository.AddUser(user);
+            await _rp.saveChangesAsync();
         }
 
-        public Task DeleteUserFromService(int id)
+        public async Task DeleteUserFromService(int id)
         {
-            throw new NotImplementedException();
+            var getDeleteFromUser = await _rp.userRepository.GetUserById(id);
+            await _rp.userRepository.DeleteUser(getDeleteFromUser);
+            await _rp.saveChangesAsync();
         }
 
-        public async Task<IEnumerable<User>> GetAllUsers(bool v)
+        public async Task<IEnumerable<User>> GetAllUsers()
         {
-            return await _rp.userRepository.GetAllUsers(v);
+            return await _rp.userRepository.GetAllUsers();
         }
 
-        public Task<User> GetUserById(int id)
+        public async Task<User> GetUserById(int id)
         {
-            throw new NotImplementedException();
+            return await _rp.userRepository.GetUserById(id);
         }
 
-        public Task UpdateUserFromService(User user)
+        public async Task UpdateUserFromService(User user)
         {
-            throw new NotImplementedException();
+            var getUserForUpdate = await _rp.userRepository.GetUserById(user.UserId);
+            getUserForUpdate.Surname = user.Surname;
+            getUserForUpdate.Email = user.Email;
+            getUserForUpdate.Name = user.Name;
+            await _rp.userRepository.UpdateUser(getUserForUpdate);
+            await _rp.saveChangesAsync();
+
         }
     }
 }

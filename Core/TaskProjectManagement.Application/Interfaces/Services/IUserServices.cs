@@ -12,7 +12,7 @@ namespace TaskProjectManagement.Application.Interfaces.Services
         Task AddUserFromService(User user);
         Task UpdateUserFromService(User user);
         Task DeleteUserFromService(int id);
-        Task<IEnumerable<User>> GetAllUsers(bool v);
+        Task<IEnumerable<User>> GetAllUsers();
         Task<User> GetUserById(int id);
     }
 }
