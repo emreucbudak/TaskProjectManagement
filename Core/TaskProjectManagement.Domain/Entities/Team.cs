@@ -12,8 +12,8 @@ namespace TaskProjectManagement.Domain.Entities
         public string TeamName { get; set; }
         public int teamLeaderId { get; set; }
         public TeamLeader teamLeader { get; set; }
-        public ICollection<Worker> Worker { get; set; }
-        public ICollection<Demand> Demands { get; set; }
+        public ICollection<Worker>? Worker { get; set; }
+        public ICollection<Demand>? Demands { get; set; }
         public int MissionId { get; set; }
         public Mission Mission { get; set; }
         public int MemberCount { get; set; } = 0;

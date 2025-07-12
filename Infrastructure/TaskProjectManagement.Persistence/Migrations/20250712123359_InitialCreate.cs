@@ -97,9 +97,9 @@ namespace TaskProjectManagement.Persistence.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TeamId = table.Column<int>(type: "int", nullable: false),
+                    TeamId = table.Column<int>(type: "int", nullable: true),
                     IsAvailable = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
-                    CreatedById = table.Column<int>(type: "int", nullable: false)
+                    CreatedById = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -108,14 +108,12 @@ namespace TaskProjectManagement.Persistence.Migrations
                         name: "FK_Workers_Team_TeamId",
                         column: x => x.TeamId,
                         principalTable: "Team",
-                        principalColumn: "TeamId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "TeamId");
                     table.ForeignKey(
                         name: "FK_Workers_Users_CreatedById",
                         column: x => x.CreatedById,
                         principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "UserId");
                 });
 
             migrationBuilder.CreateTable(

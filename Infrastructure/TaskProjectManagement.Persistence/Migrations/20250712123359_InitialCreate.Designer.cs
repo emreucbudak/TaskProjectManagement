@@ -12,7 +12,7 @@ using TaskProjectManagement.Persistence.ProjectDbContext;
 namespace TaskProjectManagement.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250712075018_InitialCreate")]
+    [Migration("20250712123359_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -255,7 +255,7 @@ namespace TaskProjectManagement.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CreatedById")
+                    b.Property<int?>("CreatedById")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -275,7 +275,7 @@ namespace TaskProjectManagement.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TeamId")
+                    b.Property<int?>("TeamId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -390,15 +390,11 @@ namespace TaskProjectManagement.Persistence.Migrations
                 {
                     b.HasOne("TaskProjectManagement.Domain.Entities.User", "CreatedBy")
                         .WithMany("CreatedWorkers")
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CreatedById");
 
                     b.HasOne("TaskProjectManagement.Domain.Entities.Team", "Team")
                         .WithMany("Worker")
-                        .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TeamId");
 
                     b.Navigation("CreatedBy");
 

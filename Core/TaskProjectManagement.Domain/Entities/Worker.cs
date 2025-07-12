@@ -13,13 +13,13 @@ namespace TaskProjectManagement.Domain.Entities
         public string Email { get; set; }
         public string Password { get; set; }
         public ICollection<Demand>? Demands { get; set; }
-        public int TeamId { get; set; }
-        public Team Team { get; set; }
+        public int? TeamId { get; set; }
+        public Team? Team { get; set; }
         public bool IsAvailable { get; set; }
 
-        public int CreatedById { get; set; }
-        public User CreatedBy { get; set; }
-        public ICollection<WorkerNotification> Notifications { get; set; }
+        public int? CreatedById { get; set; }
+        public User? CreatedBy { get; set; }
+        public ICollection<WorkerNotification>? Notifications { get; set; }
 
     }
 }
