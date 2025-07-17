@@ -20,7 +20,7 @@ namespace TaskProjectManagement.Persistence.ProjectDbContext
         public DbSet<Notifications> Notifications { get; set; }
         public DbSet<SubTask> SubTasks { get; set; }
         public DbSet<Team> Team { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<CompanyLeader> Users { get; set; }
         public DbSet<WorkerNotification> WorkersNotification { get; set; }
         public DbSet<Worker> Workers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -35,6 +35,8 @@ namespace TaskProjectManagement.Persistence.ProjectDbContext
             modelBuilder.Entity<WorkerNotification>().HasKey(b=> b.WorkerNotificationId);
             modelBuilder.Entity<Demand>().HasOne(b=> b.Team).WithMany(b=> b.Demands).OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<Demand>().HasOne(b => b.Worker).WithMany(b => b.Demands).OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Company>().Property(b => b.CompanyMemberCount).HasDefaultValue(0);
+            modelBuilder.Entity<ReportSystem>().Property(b => b.IsClosed).HasDefaultValue(false);
 
         }
 

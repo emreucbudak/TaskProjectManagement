@@ -15,14 +15,10 @@ namespace TaskProjectManagement.Persistence.Repositories
         {
         }
 
-        public async Task AddWorkerNotification(int userId, int notificationId)
+        public async Task AddWorkerNotification(WorkerNotification workers)
         {
-            var addWorker = new WorkerNotification
-            {
-                NotificationsId = notificationId,
-                UserId = userId,
-            };
-            await AddObj(addWorker);
+            await AddObj(workers);
+
         }
 
         public async Task<IEnumerable<WorkerNotification>> getAllNotification(int userId)

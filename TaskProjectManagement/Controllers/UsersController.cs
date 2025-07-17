@@ -24,7 +24,7 @@ namespace TaskProjectManagement.Controllers
 
         // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<CompanyLeader>>> GetUsers()
         {
             var allUser = await _context.users.GetAllUsers();
             return Ok(allUser);
@@ -32,7 +32,7 @@ namespace TaskProjectManagement.Controllers
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<CompanyLeader>> GetUser(int id)
         {
             return Ok(await _context.users.GetUserById(id));
         }
@@ -40,7 +40,7 @@ namespace TaskProjectManagement.Controllers
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        public async Task<IActionResult> PutUser(int id, CompanyLeader user)
         {
             await _context.users.UpdateUserFromService(user);
 
@@ -50,7 +50,7 @@ namespace TaskProjectManagement.Controllers
         // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<CompanyLeader>> PostUser(CompanyLeader user)
         {
           await _context.users.AddUserFromService(user);
 

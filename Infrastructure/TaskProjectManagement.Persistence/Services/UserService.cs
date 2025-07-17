@@ -19,7 +19,7 @@ namespace TaskProjectManagement.Persistence.Services
             _rp = rp;
         }
 
-        public async Task AddUserFromService(User user)
+        public async Task AddUserFromService(CompanyLeader user)
         {
             user.Password = BCrypt.Net.BCrypt.EnhancedHashPassword(user.Password);
             await _rp.userRepository.AddUser(user);
@@ -33,17 +33,17 @@ namespace TaskProjectManagement.Persistence.Services
             await _rp.saveChangesAsync();
         }
 
-        public async Task<IEnumerable<User>> GetAllUsers()
+        public async Task<IEnumerable<CompanyLeader>> GetAllUsers()
         {
             return await _rp.userRepository.GetAllUsers();
         }
 
-        public async Task<User> GetUserById(int id)
+        public async Task<CompanyLeader> GetUserById(int id)
         {
             return await _rp.userRepository.GetUserById(id);
         }
 
-        public async Task UpdateUserFromService(User user)
+        public async Task UpdateUserFromService(CompanyLeader user)
         {
             var getUserForUpdate = await _rp.userRepository.GetUserById(user.UserId);
             getUserForUpdate.Surname = user.Surname;

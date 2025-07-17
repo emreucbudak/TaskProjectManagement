@@ -18,8 +18,10 @@ namespace TaskProjectManagement.Domain.Entities
         public bool IsAvailable { get; set; }
 
         public int? CreatedById { get; set; }
-        public User? CreatedBy { get; set; }
+        public CompanyLeader? CreatedBy { get; set; }
         public ICollection<WorkerNotification>? Notifications { get; set; }
+        public int CompanyId {  get; set; }
+        public Company? Company {  get; set; }
 
     }
 }

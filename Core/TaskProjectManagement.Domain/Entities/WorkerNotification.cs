@@ -10,7 +10,7 @@ namespace TaskProjectManagement.Domain.Entities
     {
         public int WorkerNotificationId { get; set; }
         public int UserId { get; set; }
-        public User User { get; set; }
+        public CompanyLeader User { get; set; }
         public int NotificationsId { get; set; }
         public Notifications Notifications { get; set; }
     }

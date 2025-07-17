@@ -9,10 +9,10 @@ namespace TaskProjectManagement.Application.Interfaces.Repositories
 {
     public interface IUserRepository
     {
-        Task AddUser (User user);
-        Task UpdateUser (User user);
-        Task DeleteUser (User user);
-        Task<IEnumerable<User>> GetAllUsers ();
-        Task<User> GetUserById (int id);
+        Task AddUser (CompanyLeader user);
+        Task UpdateUser (CompanyLeader user);
+        Task DeleteUser (CompanyLeader user);
+        Task<IEnumerable<CompanyLeader>> GetAllUsers ();
+        Task<CompanyLeader> GetUserById (int id);
     }
 }

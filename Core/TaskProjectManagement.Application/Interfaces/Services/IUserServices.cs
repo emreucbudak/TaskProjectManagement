@@ -9,10 +9,10 @@ namespace TaskProjectManagement.Application.Interfaces.Services
 {
     public interface IUserServices
     {
-        Task AddUserFromService(User user);
-        Task UpdateUserFromService(User user);
+        Task AddUserFromService(CompanyLeader user);
+        Task UpdateUserFromService(CompanyLeader user);
         Task DeleteUserFromService(int id);
-        Task<IEnumerable<User>> GetAllUsers();
-        Task<User> GetUserById(int id);
+        Task<IEnumerable<CompanyLeader>> GetAllUsers();
+        Task<CompanyLeader> GetUserById(int id);
     }
 }

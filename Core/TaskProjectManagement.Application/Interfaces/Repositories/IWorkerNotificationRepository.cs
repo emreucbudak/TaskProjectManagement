@@ -9,7 +9,7 @@ namespace TaskProjectManagement.Application.Interfaces.Repositories
 {
     public interface IWorkerNotificationRepository
     {
-        Task AddWorkerNotification(int userId, int notificationId);
+        Task AddWorkerNotification(WorkerNotification workers);
         Task<IEnumerable<WorkerNotification>> getAllNotification(int userId);
         
 

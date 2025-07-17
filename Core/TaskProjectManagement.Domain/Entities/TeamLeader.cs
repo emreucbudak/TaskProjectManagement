@@ -15,5 +15,8 @@ namespace TaskProjectManagement.Domain.Entities
         public int TeamId { get; set; }
         public Team Team { get; set; }
         public ICollection<Notifications>? Notifications { get; set; }   
+        public int CompanyId { get; set; }
+        public Company? Company { get; set; }
+
     }
 }

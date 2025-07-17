@@ -9,33 +9,33 @@ using TaskProjectManagement.Persistence.ProjectDbContext;
 
 namespace TaskProjectManagement.Persistence.Repositories
 {
-    public class UserRepository : RepositoryBase<User>, IUserRepository
+    public class UserRepository : RepositoryBase<CompanyLeader>, IUserRepository
     {
         public UserRepository(ApplicationDbContext db) : base(db)
         {
         }
 
-        public async Task AddUser(User user)
+        public async Task AddUser(CompanyLeader user)
         {
             await AddObj(user);
         }
 
-        public async Task DeleteUser(User user)
+        public async Task DeleteUser(CompanyLeader user)
         {
             await DeleteObj(user);
         }
 
-        public async Task<IEnumerable<User>> GetAllUsers()
+        public async Task<IEnumerable<CompanyLeader>> GetAllUsers()
         {
             return await GetAllObj(false);
         }
 
-        public async Task<User> GetUserById(int id)
+        public async Task<CompanyLeader> GetUserById(int id)
         {
             return await GetByIdObj(b => b.UserId == id);
         }
 
-        public async Task UpdateUser(User user)
+        public async Task UpdateUser(CompanyLeader user)
         {
             await UpdateObj(user);
         }
