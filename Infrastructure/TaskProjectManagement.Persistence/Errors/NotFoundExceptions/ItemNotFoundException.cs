@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TaskProjectManagement.Domain.Errors
+namespace TaskProjectManagement.Persistence.Errors.NotFoundExceptions
 {
     public class ItemNotFoundException : Exception
     {

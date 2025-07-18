@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using TaskProjectManagement.Application.Interfaces.Repositories;
 using TaskProjectManagement.Application.Interfaces.Services;
 using TaskProjectManagement.Domain.Entities;
+using TaskProjectManagement.Persistence.Errors.NotFoundExceptions;
+
 
 namespace TaskProjectManagement.Persistence.Services
 {
@@ -20,6 +22,7 @@ namespace TaskProjectManagement.Persistence.Services
 
         public async Task AddNotificationFromService(Notifications ntfc)
         {
+
             await _rp.notificationRepository.AddNotification(ntfc);
             await _rp.saveChangesAsync();
         }
@@ -31,18 +34,31 @@ namespace TaskProjectManagement.Persistence.Services
 
         public async Task<Notifications> GetNotificationsFromService(int id)
         {
-            return await _rp.notificationRepository.GetNotificationsById(id);
+            var getNotificationsById =  await _rp.notificationRepository.GetNotificationsById(id);
+            if (getNotificationsById is null)
+            {
+                throw new NotificationNotFoundException(id);
+            }
+            return getNotificationsById;
         }
 
         public async Task RemoveNotificationFromService(int ntfc)
         {
             var getNotificationForDelete = await _rp.notificationRepository.GetNotificationsById(ntfc);
+            if (getNotificationForDelete is null)
+            {
+                throw new NotificationNotFoundException(ntfc);
+            }
             await _rp.notificationRepository.RemoveNotification(getNotificationForDelete);
         }
 
         public async Task UpdateNotificationFromService(Notifications ntfc)
         {
             var getNotificationForUpdate = await _rp.notificationRepository.GetNotificationsById(ntfc.NotificationId);
+            if (getNotificationForUpdate is null)
+            {
+                throw new NotificationNotFoundException(ntfc.NotificationId);
+            }
             getNotificationForUpdate.NotificationText = ntfc.NotificationText;
             getNotificationForUpdate.NotificationTitle = ntfc.NotificationTitle;
             await _rp.notificationRepository.UpdateNotification(getNotificationForUpdate);

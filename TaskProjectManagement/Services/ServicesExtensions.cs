@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TaskProjectManagement.Application.Interfaces.Repositories;
 using TaskProjectManagement.Application.Interfaces.Services;
+using TaskProjectManagement.Persistence.ActionFilters;
 using TaskProjectManagement.Persistence.ProjectDbContext;
 using TaskProjectManagement.Persistence.Repositories;
 using TaskProjectManagement.Persistence.Services;
@@ -44,6 +45,10 @@ namespace TaskProjectManagement.Services
         public static void ServiceBase(this IServiceCollection services)
         {
             services.AddScoped<IServiceManager, ServiceManager>();
+        }
+        public static void FilterAttribute (this IServiceCollection services)
+        {
+            services.AddScoped<InsertFilterAttribute>();
         }
 
     }

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using TaskProjectManagement.Application.Interfaces.Repositories;
 using TaskProjectManagement.Application.Interfaces.Services;
 using TaskProjectManagement.Domain.Entities;
+using TaskProjectManagement.Persistence.Errors.NotFoundExceptions;
+
 
 namespace TaskProjectManagement.Persistence.Services
 {
@@ -20,6 +22,7 @@ namespace TaskProjectManagement.Persistence.Services
 
         public async Task AddDemandFromService(Demand dem)
         {
+
             await _rp.demandRepository.AddDemand(dem);
             await _rp.saveChangesAsync();
         }
@@ -27,6 +30,10 @@ namespace TaskProjectManagement.Persistence.Services
         public async Task DeleteDemandFromService(int demandId)
         {
             var getDemandForDelete = await _rp.demandRepository.GetDemandById(demandId);
+            if (getDemandForDelete is null)
+            {
+                throw new DemandNotFoundException(demandId);
+            }
             await _rp.demandRepository.DeleteDemand(getDemandForDelete);
             await _rp.saveChangesAsync();
         }
@@ -38,12 +45,19 @@ namespace TaskProjectManagement.Persistence.Services
 
         public async Task<Demand> GetOneDemandFromService(int id)
         {
-            return await _rp.demandRepository.GetDemandById(id);
+            var getDemandForList =  await _rp.demandRepository.GetDemandById(id);
+            if (getDemandForList is null) {
+                throw new DemandNotFoundException(id);
+            }
+            return getDemandForList;
         }
 
         public async Task UpdateDemandFromService(Demand demand)
         {
             var updateDemand = await _rp.demandRepository.GetDemandById(demand.DemandId);
+            if (updateDemand is null) {
+                throw new DemandNotFoundException(demand.DemandId);
+            }
             updateDemand.DemandTitle = demand.DemandTitle;
             updateDemand.DemandDescription = demand.DemandDescription;
             await _rp.demandRepository.UpdateDemand(updateDemand);

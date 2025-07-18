@@ -14,5 +14,6 @@ namespace TaskProjectManagement.Application.Interfaces.Repositories
         Task UpdateCompanyRequest (CompanyRequest company);
         Task<IEnumerable<CompanyRequest>> GetAllCompanyRequests();
         Task<CompanyRequest> GetCompanyById (int id);
+        Task<CompanyRequest> GetCompanyByName (string name);    
     }
 }

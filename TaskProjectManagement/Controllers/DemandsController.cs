@@ -7,12 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TaskProjectManagement.Application.Interfaces.Services;
 using TaskProjectManagement.Domain.Entities;
+using TaskProjectManagement.Persistence.ActionFilters;
 using TaskProjectManagement.Persistence.ProjectDbContext;
 
 namespace TaskProjectManagement.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class DemandsController : ControllerBase
     {
         private readonly IServiceManager _context;
@@ -55,6 +57,7 @@ namespace TaskProjectManagement.Controllers
         // POST: api/Demands
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [ServiceFilter(typeof(InsertFilterAttribute))]
         public async Task<ActionResult<Demand>> PostDemand(Demand demand)
         {
             if (demand != null) {

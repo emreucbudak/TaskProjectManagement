@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using TaskProjectManagement.Application.Interfaces.Repositories;
 using TaskProjectManagement.Application.Interfaces.Services;
 using TaskProjectManagement.Domain.Entities;
+using TaskProjectManagement.Persistence.Errors.NotFoundExceptions;
+
 
 namespace TaskProjectManagement.Persistence.Services
 {
@@ -20,6 +22,7 @@ namespace TaskProjectManagement.Persistence.Services
 
         public async Task AddSubTaskFromService(SubTask subTask)
         {
+
             await rp.subTaskRepository.AddSubtask(subTask);
             await rp.saveChangesAsync();
         }
@@ -31,13 +34,22 @@ namespace TaskProjectManagement.Persistence.Services
 
         public async Task<SubTask> GetSubTaskFromService(int id)
         {
-            return await rp.subTaskRepository.GetSubTaskById(id);
+            var getSubTask =  await rp.subTaskRepository.GetSubTaskById(id);
+            if(getSubTask is null )
+            {
+                throw new SubTaskNotFoundException(id);
+            }
+            return getSubTask;
 
         }
 
         public async Task RemoveSubTaskFromService(int id)
         {
             var getSubTaskForRemove = await rp.subTaskRepository.GetSubTaskById(id);
+            if (getSubTaskForRemove is null )
+            {
+                throw new SubTaskNotFoundException(id);
+            }
             await rp.subTaskRepository.DeleteSubtask(getSubTaskForRemove);
             await rp.saveChangesAsync();
         }
@@ -45,6 +57,10 @@ namespace TaskProjectManagement.Persistence.Services
         public async Task UpdateSubTaskFromService(SubTask subTask)
         {
             var getSubTaskForUpdate = await rp.subTaskRepository.GetSubTaskById(subTask.SubTaskId);
+            if (getSubTaskForUpdate is null )
+            {
+                throw new SubTaskNotFoundException(subTask.SubTaskId);
+            }
             getSubTaskForUpdate.TaskName = subTask.TaskName;
             getSubTaskForUpdate.TaskDescription = subTask.TaskDescription;
             getSubTaskForUpdate.IsComplete = subTask.IsComplete;

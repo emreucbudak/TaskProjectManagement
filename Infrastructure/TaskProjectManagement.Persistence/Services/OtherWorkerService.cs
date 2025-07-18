@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using TaskProjectManagement.Application.Interfaces.Repositories;
 using TaskProjectManagement.Application.Interfaces.Services;
 using TaskProjectManagement.Domain.Entities;
+using TaskProjectManagement.Persistence.Errors.NotFoundExceptions;
+
 
 namespace TaskProjectManagement.Persistence.Services
 {
@@ -20,6 +22,7 @@ namespace TaskProjectManagement.Persistence.Services
 
         public async Task AddOtherWorker(OtherWorker worker)
         {
+
             worker.WorkerPassword = BCrypt.Net.BCrypt.EnhancedHashPassword(worker.WorkerPassword);
             await _repositoryManager.otherWorkerRepository.AddOtherWorkerFromRepo(worker);
             await _repositoryManager.saveChangesAsync();
@@ -32,13 +35,22 @@ namespace TaskProjectManagement.Persistence.Services
 
         public async Task<OtherWorker> GetOtherWorker(int worker)
         {
-            return await _repositoryManager.otherWorkerRepository.GetOtherWorkerFromRepository(worker);
+            var otherWorkerForList =  await _repositoryManager.otherWorkerRepository.GetOtherWorkerFromRepository(worker);
+            if (otherWorkerForList is null)
+            {
+                throw new OtherWorkerNotFoundException(worker);
+            }
+            return otherWorkerForList;
 
         }
 
         public async Task RemoveOtherWorker(int worker)
         {
             var getOtherWorkerForRemove = await _repositoryManager.otherWorkerRepository.GetOtherWorkerFromRepository(worker);
+            if (getOtherWorkerForRemove is null)
+            {
+                throw new OtherWorkerNotFoundException(worker);
+            }
             await _repositoryManager.otherWorkerRepository.DeleteOtherWorkerFromRepository(getOtherWorkerForRemove);
             await _repositoryManager.saveChangesAsync();
         }
@@ -46,6 +58,10 @@ namespace TaskProjectManagement.Persistence.Services
         public async Task UpdateOtherWorker(OtherWorker worker)
         {
             var getOtherWorkerForUpdate = await _repositoryManager.otherWorkerRepository.GetOtherWorkerFromRepository(worker.OtherWorkerId);
+            if (getOtherWorkerForUpdate is null)
+            {
+                throw new OtherWorkerNotFoundException(worker.OtherWorkerId);
+            }
             getOtherWorkerForUpdate.WorkerEmail = worker.WorkerEmail;
             getOtherWorkerForUpdate.WorkerSurname = worker.WorkerSurname;
             getOtherWorkerForUpdate.WorkerName = worker.WorkerName;

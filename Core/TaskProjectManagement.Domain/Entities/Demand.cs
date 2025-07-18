@@ -12,6 +12,7 @@ namespace TaskProjectManagement.Domain.Entities
         public string DemandTitle { get; set; }
         public string DemandDescription { get; set; }
         public bool IsConfirmed { get; set; }
+        public string ResponseTitle { get; set; }
         public int teamLeaderId { get; set; }
         public TeamLeader teamLeader { get; set; }
         public int WorkerId { get; set; }

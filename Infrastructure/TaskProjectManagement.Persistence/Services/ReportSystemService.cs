@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using TaskProjectManagement.Application.Interfaces.Repositories;
 using TaskProjectManagement.Application.Interfaces.Services;
 using TaskProjectManagement.Domain.Entities;
+using TaskProjectManagement.Persistence.Errors.NotFoundExceptions;
+
 
 namespace TaskProjectManagement.Persistence.Services
 {
@@ -21,6 +23,7 @@ namespace TaskProjectManagement.Persistence.Services
 
         public async Task AddReportFromService(ReportSystem reportSystem)
         {
+
             await _repositoryManager.reportSystemRepository.AddReportFromRepo(reportSystem);
             await _repositoryManager.saveChangesAsync();
         }
@@ -31,9 +34,15 @@ namespace TaskProjectManagement.Persistence.Services
 
         }
 
-        public async Task<ReportSystem> GetReceiverReportSystemById(int reportId, int receiverId)
+        public async Task<ReportSystem> GetReceiverReportSystemById(int reportId)
         {
-            return await _repositoryManager.reportSystemRepository.GetReceiverReportFromRepo(reportId, receiverId);
+            var getReport =  await _repositoryManager.reportSystemRepository.GetReceiverReportFromRepo(reportId);
+            if (getReport is null)
+            {
+                throw new   ReportNotFoundException(reportId);
+            }
+            return getReport;
+
         }
 
         public async Task<IEnumerable<ReportSystem>> GetSenderReportSystems(int senderId)

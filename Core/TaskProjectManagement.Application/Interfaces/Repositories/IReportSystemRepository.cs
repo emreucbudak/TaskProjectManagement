@@ -14,7 +14,7 @@ namespace TaskProjectManagement.Application.Interfaces.Repositories
         Task DeleteReportFromRepo (ReportSystem reportSystem);
         Task UpdateReportFromRepo (ReportSystem reportSystem);
         Task<IEnumerable<ReportSystem>> GetSenderReportFromRepo(int userId);
-        Task<ReportSystem> GetReceiverReportFromRepo(int reportId,int receiverId);
+        Task<ReportSystem> GetReceiverReportFromRepo(int reportId);
         Task<IEnumerable<ReportSystem>> GetAllReportsFromRepo(int receiverId);
         Task<ReportSystem> GetPostForDeleteFromRepository(int postId);
         Task<ReportSystem> GetPostForUpdateFromRepository(int postId);

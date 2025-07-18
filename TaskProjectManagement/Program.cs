@@ -3,6 +3,7 @@ using TaskProjectManagement.Persistence.ProjectDbContext;
 using TaskProjectManagement.Services;
 using Serilog;
 using TaskProjectManagement.ErrorManagement;
+using NuGet.Protocol.Plugins;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +31,9 @@ builder.Services.RepositoryRegister();
 builder.Services.RepositoryBaseInclude();
 builder.Services.ServiceBase();
 builder.Services.ServiceManage();
+builder.Services.AddAuthorization();
+builder.Services.AddControllers();
+
 
 
 var app = builder.Build();
@@ -42,8 +46,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 app.UseHttpsRedirection();
+
 
 app.UseAuthorization();
 

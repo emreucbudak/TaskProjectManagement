@@ -37,6 +37,13 @@ namespace TaskProjectManagement.Persistence.Repositories
             return await GetByIdObj(b => b.RequestId == id);
         }
 
+        public async Task<CompanyRequest> GetCompanyByName(string name)
+        {
+            var getCompanyByName = await GetAllObj(false);
+            return getCompanyByName.Where(b => b.CompanyName == name).FirstOrDefault();
+
+        }
+
         public async Task UpdateCompanyRequest(CompanyRequest company)
         {
             await UpdateObj(company);

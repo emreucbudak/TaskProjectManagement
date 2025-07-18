@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http.Features;
 using TaskProjectManagement.Domain.ErrorModels;
-using TaskProjectManagement.Domain.Errors;
+using TaskProjectManagement.Persistence.Errors.NotFoundExceptions;
 
 namespace TaskProjectManagement.ErrorManagement
 {

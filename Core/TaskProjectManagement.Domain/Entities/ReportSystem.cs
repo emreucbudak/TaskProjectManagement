@@ -13,6 +13,7 @@ namespace TaskProjectManagement.Domain.Entities
         public string ReportTopic { get; set; }
         public string ReportDescription { get; set; }
         public bool IsClosed { get; set; }
+        public string ReportAnswer  { get; set; }
         public int OtherWorkerId { get; set; }
         public OtherWorker OtherWorker { get; set; }
         public int WorkerId { get; set; }

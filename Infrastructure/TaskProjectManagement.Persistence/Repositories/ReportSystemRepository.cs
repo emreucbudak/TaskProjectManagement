@@ -49,10 +49,10 @@ namespace TaskProjectManagement.Persistence.Repositories
 
         }
 
-        public async Task<ReportSystem> GetReceiverReportFromRepo(int reportId , int receiverId)
+        public async Task<ReportSystem> GetReceiverReportFromRepo(int reportId)
         {
             var getOneReportFromReceiver = await GetAllObj(false);
-            return getOneReportFromReceiver.Where(b => b.WorkerId==receiverId&& b.ReportId == reportId).FirstOrDefault();
+            return getOneReportFromReceiver.Where(b =>  b.ReportId == reportId).FirstOrDefault();
         }
 
         public async Task<IEnumerable<ReportSystem>> GetSenderReportFromRepo(int userId)

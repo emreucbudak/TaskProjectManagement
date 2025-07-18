@@ -11,7 +11,7 @@ namespace TaskProjectManagement.Application.Interfaces.Services
     {
         Task AddReportFromService (ReportSystem reportSystem);
         Task RemoveReportFromService (int reportSystemId);  
-        Task<ReportSystem> GetReceiverReportSystemById (int reportId ,int receiverId);
+        Task<ReportSystem> GetReceiverReportSystemById (int reportId);
         Task UpdateReportFromService (ReportSystem reportSystem);
         Task<IEnumerable<ReportSystem>> GetSenderReportSystems (int senderId);
         Task<IEnumerable<ReportSystem>> GetAllReceiverReport(int receiverId);   
