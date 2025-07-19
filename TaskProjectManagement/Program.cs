@@ -24,7 +24,7 @@ builder.Host.UseSerilog();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.ForAutoMapper();
 builder.Services.ConfigureSql(builder.Configuration);
 builder.Services.RepositoryManage();
 builder.Services.RepositoryRegister();

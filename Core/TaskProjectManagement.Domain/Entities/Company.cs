@@ -11,6 +11,7 @@ namespace TaskProjectManagement.Domain.Entities
         public int Id { get; set; }
         public string CompanyName   { get; set; }
         public string CompanyLogo { get; set; }
+        public bool IsClosed { get; set; }
         public int CompanyMemberCount { get; set; }
         public ICollection<Worker>? Worker { get; set; }
         public ICollection<TeamLeader>? TeamLeader { get; set; }

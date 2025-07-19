@@ -5,6 +5,7 @@ using TaskProjectManagement.Persistence.ActionFilters;
 using TaskProjectManagement.Persistence.ProjectDbContext;
 using TaskProjectManagement.Persistence.Repositories;
 using TaskProjectManagement.Persistence.Services;
+using TaskProjectManagement.Utilities.AutoMapper;
 
 namespace TaskProjectManagement.Services
 {
@@ -49,6 +50,11 @@ namespace TaskProjectManagement.Services
         public static void FilterAttribute (this IServiceCollection services)
         {
             services.AddScoped<InsertFilterAttribute>();
+            services.AddScoped<OperationLoggingFilterAttribute>();
+        }
+        public static void ForAutoMapper (this IServiceCollection services)
+        {
+            services.AddAutoMapper(typeof(MappingProfile).Assembly);
         }
 
     }

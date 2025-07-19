@@ -7,18 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TaskProjectManagement.Persistence.Errors.NullExceptions;
-using ILogger = Serilog.ILogger;
+
 
 namespace TaskProjectManagement.Persistence.ActionFilters
 {
     public class InsertFilterAttribute : ActionFilterAttribute
     {
-        private readonly ILogger _logger;
 
-        public InsertFilterAttribute(ILogger logger)
-        {
-            _logger = logger;
-        }
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             var controllerName = context.RouteData.Values["controller"];
@@ -29,7 +24,7 @@ namespace TaskProjectManagement.Persistence.ActionFilters
                 if (arg.Value == null)
                 {
                     var degisken = arg.Key;
-                    _logger.Information($"{controllerName} controllerında {actionName} actionunda  {degisken} null oldugundan gönderilemedi!");
+                    Log.Logger.Error($"{controllerName} controllerında {actionName} actionunda  {degisken} null oldugundan gönderilemedi!");
                     throw new ObjectNullExceptions();
                 }
 
